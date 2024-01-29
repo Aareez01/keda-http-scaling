@@ -1,0 +1,18 @@
+kind: HTTPScaledObject
+apiVersion: http.keda.sh/v1alpha1
+metadata:
+    name: nginx-scaledobject
+    namespace: demo
+spec:
+    hosts:
+    - myhost.keda
+    pathPrefixes:
+    - /
+    scaleTargetRef:
+        deployment: nginx-deployment
+        service: nginx-service
+        port: 80
+    replicas:
+        min: 0
+        max: 10
+    scaledownPeriod: 20
